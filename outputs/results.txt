@@ -1,0 +1,3 @@
+Test score with linear SVM: 0.713791
+Test score with CRF: 0.713812
+Test score with Linear Chain CRF: 0.787481

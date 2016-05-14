@@ -34,7 +34,7 @@ import matplotlib.pyplot as plt
 from sklearn.svm import LinearSVC
 from common.viewers.imshow import imshow
 from pystruct.datasets import load_letters
-from pystruct.models import ChainCRF
+from pystruct.models import ChainCRF, GraphCRF
 from pystruct.learners import FrankWolfeSSVM
 
 abc = "abcdefghijklmnopqrstuvwxyz"
@@ -56,15 +56,16 @@ svm = LinearSVC(dual=False, C=.1)
 svm.fit(np.vstack(X_train), np.hstack(y_train))
 
 # Train CRF
-model = ChainCRF()
+model = ChainCRF(directed=True)
 ssvm = FrankWolfeSSVM(model=model, C=.1, max_iter=11)
-
 ssvm.fit(np.vstack(X_train).reshape((5375, 1, 128)), np.hstack(y_train).reshape(5375, 1))
 
+
 # Train linear chain CRF
-chain_model = ChainCRF()
-chain_ssvm = FrankWolfeSSVM(model=chain_model, C=.1, max_iter=11)
+chain_model = ChainCRF(directed=True)
+chain_ssvm = FrankWolfeSSVM(model=chain_model, C=.1, max_iter=11, verbose=0)
 chain_ssvm.fit(X_train, y_train)
+
 
 print("Test score with linear SVM: %f" % svm.score(np.vstack(X_test),
                                                    np.hstack(y_test)))
@@ -79,6 +80,14 @@ selected = rnd.randint(len(y_test), size=n_words)
 max_word_len = max([len(y_) for y_ in y_test[selected]])
 fig, axes = plt.subplots(n_words, max_word_len, figsize=(10, 10))
 fig.subplots_adjust(wspace=0)
+fig.text(0.2, 0.05, 'GT', color="#00AA00", size=25)
+fig.text(0.4, 0.05, 'SVM', color="#5555FF", size=25)
+fig.text(0.6, 0.05, 'LCCRF', color="#FF5555", size=25)
+fig.text(0.8, 0.05, 'CRF', color="#FFD700", size=25)
+
+fig.text(0.05, 0.5, 'Word', color="#000000", size=25)
+fig.text(0.5, 0.95, 'Letters', color="#000000", size=25)
+
 for ind, axes_row in zip(selected, axes):
     y_pred_svm = svm.predict(X_test[ind])
     y_pred_chain = chain_ssvm.predict([X_test[ind]])[0]
@@ -87,18 +96,33 @@ for ind, axes_row in zip(selected, axes):
     for i, (a, image, y_true, y_svm, y_chain, y_crf) in enumerate(
             zip(axes_row, X_test[ind], y_test[ind], y_pred_svm, y_pred_chain, y_pred_crf)):
         a.matshow(image.reshape(16, 8), cmap=plt.cm.Greys)
-        a.text(0, 3, abc[y_true], color="#00AA00", size=25)
-        a.text(0, 14, abc[y_svm], color="#5555FF", size=25)
-        a.text(5, 14, abc[y_chain], color="#FF5555", size=25)
-        a.text(5, 3, abc[y_crf], color="#FF5551", size=25)
+        a.text(0, 3, abc[y_true], color="#00AA00", size=25)    # Green
+        a.text(0, 14, abc[y_svm], color="#5555FF", size=25)    # Blue
+        a.text(5, 14, abc[y_chain], color="#FF5555", size=25)  # Red
+        a.text(5, 3, abc[y_crf], color="#FFD700", size=25)     # Yellow
         a.set_xticks(())
         a.set_yticks(())
     for ii in range(i + 1, max_word_len):
         axes_row[ii].set_visible(False)
 
-plt.matshow(ssvm.w[26 * 8 * 16:].reshape(26, 26))
-plt.colorbar()
-plt.title("Transition parameters of the chain CRF.")
-plt.xticks(np.arange(25), abc)
-plt.yticks(np.arange(25), abc)
-plt.show()
+w = chain_ssvm.w[26 * 8 * 16:].reshape(26, 26)
+# w = ssvm.w[26 * 8 * 16:].reshape(26, 26)
+w_prob = np.exp(w) / sum(np.exp(w))
+
+fig, ax = plt.subplots(nrows=1, ncols=2)
+ax[0].set_title('Transition parameters of the chain CRF.', fontsize=30)
+# ax[0].set_title('Transition parameters of the CRF.', fontsize=30)
+
+plt.sca(ax[0])
+plt.xticks(np.arange(26), abc, fontsize=20)
+plt.yticks(np.arange(26), abc, fontsize=20)
+imshow(w, ax=ax[0], fig=fig, colormap='rainbow')
+
+ax[1].set_title('Transition Probability of the chain CRF.', fontsize=30)
+# ax[1].set_title('Transition Probability of the CRF.', fontsize=30)
+plt.sca(ax[1])
+plt.xticks(np.arange(26), abc, fontsize=20)
+plt.yticks(np.arange(26), abc, fontsize=20)
+imshow(w_prob, ax=ax[1], fig=fig, colormap='rainbow', block=True)
+
+
