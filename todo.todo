@@ -1,0 +1,23 @@
+ CODE:
+   ☐ Run the plot_letters on "Undirected" methoods and compare to "directed" @OHAD @due(19.05.2016)
+   ☐ Run on "Half words" (first 2 letters) and compare to LLCRF @TOPAZ @due(19.05.2016)
+ 
+ PRESENTATION: @due(19.05.2016)
+   ☐ Theoretical background on training (Tutorial) @TSACHI
+     ☐ Inference: FrankWolfeSSVM, https://pystruct.github.io/user_guide.html @TSACHI
+     ☐ Data presentation - see Whatapp PDF @TSACHI
+     ☐ Graph presentation - node for each letter in word, etc.. @TSACHI
+
+   ☐ Daphny's Paper: http://papers.nips.cc/paper/2397-max-margin-markov-networks.pdf @TSACHI
+   ☐ Add reulsts from code/outputs @TSACHI
+
+ COMMON: @due(22.05.2016)
+   ☐ Describe limitations and future work for improvements (Part 3) @OHAD @TOPAZ @TSACHI
+     - General CRF - "before and after" letters
+     - RNN as CRF: http://www.robots.ox.ac.uk/~szheng/papers/CRFasRNN.pdf @OHAD
+     - SVM as CRF
+
+
+  Important dates:
+    - 26-28.05.2016 @OHAD and @Topaz are in vacation
+    - 02.06.2016 - Class presentation @OHAD @Topaz @TSACHI
