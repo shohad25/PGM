@@ -1,6 +1,6 @@
  CODE:
-   ☐ Run the plot_letters on "Undirected" methoods and compare to "directed" @OHAD @due(19.05.2016)
-   ☐ Run on "Half words" (first 2 letters) and compare to LLCRF @TOPAZ @due(19.05.2016)
+   ✔ Run the plot_letters on "Undirected" methoods and compare to "directed" @OHAD @due(19.05.2016) @done (16-05-17 07:56)
+   ✔ Run on "Half words" (first 2 letters) and compare to LLCRF @TOPAZ @due(19.05.2016) @done (16-05-17 08:43)
  
  PRESENTATION: @due(19.05.2016)
    ☐ Theoretical background on training (Tutorial) @TSACHI

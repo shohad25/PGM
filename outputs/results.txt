@@ -1,8 +1,28 @@
+Linear Chain vs Regular CRF:
 Test score with linear SVM: 0.713791
 Test score with CRF: 0.713812
 Test score with Linear Chain CRF: 0.787481
 
 
+Directed vs Undirected:
 Test score with linear SVM: 0.713791
 Test score with directed LCCRF: 0.786241
 Test score with undirected LCCRF: 0.768711
+
+LCCRF with fixed number of letters:
+1. Test score with 1-LCCRF: 0.713812
+2. Test score with 2-LCCRF: Problem
+3. Test score with 3-LCCRF: 0.629839
+4. Test score with 4-LCCRF: 0.680676
+5. Test score with 5-LCCRF: 0.712252
+6. Test score with 6-LCCRF: 0.737435
+7. Test score with 7-LCCRF: 0.748958
+8. Test score with 8-LCCRF: 0.763987
+
+Half word:
+Take each word and seperate it to 2:
+For example: "workout"  -> "wor", "kout"
+
+Test score with linear SVM: 0.713791
+Test score with FULL LCCRF: 0.786241
+Test score with HALF LCCRF: 0.779849
