@@ -54,16 +54,19 @@ svm = LinearSVC(dual=False, C=.1)
 svm.fit(np.vstack(X_train), np.hstack(y_train))
 
 # Predict all data with the SVM calssifier:
-import pdb
-pdb.set_trace()
-svm.predict()
 
+# svm.predict()
+svm_predictions_train = np.zeros(len(X_train)) 
+svm_predictions_test = np.zeros(len(X_test))
+for word_ind in range(0, len(X_train)):
+    # svm_predictions_train[word_ind] = svm.predict(X_train[word_ind])
+    import pdb
+    pdb.set_trace()
 
 # Train CRF
 model = ChainCRF(directed=True)
 ssvm = FrankWolfeSSVM(model=model, C=.1, max_iter=11)
 ssvm.fit(np.vstack(X_train).reshape((5375, 1, 128)), np.hstack(y_train).reshape(5375, 1))
-
 
 # Train linear chain CRF
 chain_model = ChainCRF(directed=True)

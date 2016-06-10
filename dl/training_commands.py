@@ -2,9 +2,9 @@ import os, sys
 import random
 import cPickle
 
-from src.network import Network
-from src import mnist_loader
-from user_network import *
+from dl.src.network import Network
+from common.datasets.load_datasets import mnist_loader
+from dl.user_network import *
 import pdb
 # import rlcompleter
 # pdb.Pdb.complete = rlcompleter.Completer(locals()).complete
@@ -17,7 +17,7 @@ import pdb
 # b - int 64 - only one number (label 0-9)
 
 # get the data
-training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
+training_data, validation_data, test_data = mnist_loader()
 # del training_data
 
 # base_path = os.path.join(os.getcwd(), "data")
