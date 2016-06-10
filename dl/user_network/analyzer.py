@@ -9,7 +9,7 @@ import os
 import pickle
 import matplotlib.pylab as plt
 import numpy as np
-import src.network as network
+import dl.src.network2 as network
 
 
 class Analyzer():
