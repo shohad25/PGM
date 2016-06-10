@@ -28,25 +28,23 @@ training_data = []
 for i, n in enumerate(y_train):
     n_vec = np.zeros((26,1))
     n_vec[n] = 1
-    training_data.append((X_train[i], n_vec))
+    training_data.append((np.reshape(X_train[i], (128,1)), n_vec))
 
 test_data = []
 for i, n in enumerate(y_test):
-    n_vec = np.zeros((26,1))
-    n_vec[n] = 1
-    test_data.append((X_test[i], n_vec))
+    test_data.append((np.reshape(X_test[i], (128,1)), n))
 
 dict_base_name = "training_"
 
 # initialize a network for training
 image_size = 128
+num_of_hidden_neurons = 32
 num_of_labels = 26
-num_of_hidden_layers = 30
-net = Network([image_size, num_of_hidden_layers, num_of_labels])
+net = Network([image_size, num_of_hidden_neurons, num_of_labels])
 # train NN:
 num_of_epochs = 30
 mini_batch_size = 10
-eta = 3.0
+eta = 1.0
 net.SGD(training_data, num_of_epochs, mini_batch_size, eta, test_data)
 
 # save results:
