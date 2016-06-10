@@ -51,9 +51,13 @@ y_train, y_test = y[folds == 1], y[folds != 1]
 
 # Train linear SVM
 svm = LinearSVC(dual=False, C=.1)
-# flatten input
-
 svm.fit(np.vstack(X_train), np.hstack(y_train))
+
+# Predict all data with the SVM calssifier:
+import pdb
+pdb.set_trace()
+svm.predict()
+
 
 # Train CRF
 model = ChainCRF(directed=True)
@@ -89,6 +93,8 @@ fig.text(0.05, 0.5, 'Word', color="#000000", size=25)
 fig.text(0.5, 0.95, 'Letters', color="#000000", size=25)
 
 for ind, axes_row in zip(selected, axes):
+    import pdb
+    pdb.set_trace()
     y_pred_svm = svm.predict(X_test[ind])
     y_pred_chain = chain_ssvm.predict([X_test[ind]])[0]
     y_pred_crf = ssvm.predict([X_test[ind]])[0]

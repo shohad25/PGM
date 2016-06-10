@@ -1,0 +1,49 @@
+SVM - Start of Training with 50000 Examples
+Baseline classifier using an SVM.
+9435 of 10000 values correct.
+ End of Training 50000 Examples
+
+SVM - Start of Training with 40000 Examples
+Baseline classifier using an SVM.
+9404 of 10000 values correct.
+ End of Training 40000 Examples
+
+SVM - Start of Training with 30000 Examples
+Baseline classifier using an SVM.
+9371 of 10000 values correct.
+ End of Training 30000 Examples
+
+SVM - Start of Training with 20000 Examples
+Baseline classifier using an SVM.
+9326 of 10000 values correct.
+ End of Training 20000 Examples
+
+SVM - Start of Training with 10000 Examples
+Baseline classifier using an SVM.
+9228 of 10000 values correct.
+ End of Training 10000 Examples
+
+SVM - Start of Training with 5000 Examples
+Baseline classifier using an SVM.
+9130 of 10000 values correct.
+ End of Training 5000 Examples
+
+SVM - Start of Training with 1000 Examples
+Baseline classifier using an SVM.
+8515 of 10000 values correct.
+ End of Training 1000 Examples
+
+SVM - Start of Training with 500 Examples
+Baseline classifier using an SVM.
+7794 of 10000 values correct.
+ End of Training 500 Examples
+
+SVM - Start of Training with 100 Examples
+Baseline classifier using an SVM.
+1937 of 10000 values correct.
+ End of Training 100 Examples
+
+SVM - Start of Training with 10 Examples
+Baseline classifier using an SVM.
+2399 of 10000 values correct.
+ End of Training 10 Examples

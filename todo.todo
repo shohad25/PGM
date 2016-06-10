@@ -1,23 +1,32 @@
- CODE:
+CODE:
    ✔ Run the plot_letters on "Undirected" methoods and compare to "directed" @OHAD @due(19.05.2016) @done (16-05-17 07:56)
    ✔ Run on "Half words" (first 2 letters) and compare to LLCRF @TOPAZ @due(19.05.2016) @done (16-05-17 08:43)
  
- PRESENTATION: @due(19.05.2016)
-   ☐ Theoretical background on training (Tutorial) @TSACHI
-     ☐ Inference: FrankWolfeSSVM, https://pystruct.github.io/user_guide.html @TSACHI
-     ☐ Data presentation - see Whatapp PDF @TSACHI
-     ☐ Graph presentation - node for each letter in word, etc.. @TSACHI
+PRESENTATION: @due(19.05.2016)
+   ✔ Theoretical background on training (Tutorial) @TSACHI @done (16-06-02 14:45)
+     ✔ Inference: FrankWolfeSSVM, https://pystruct.github.io/user_guide.html @TSACHI @done (16-06-02 14:45)
+     ✔ Data presentation - see Whatapp PDF @TSACHI @done (16-06-02 14:45)
+     ✔ Graph presentation - node for each letter in word, etc.. @TSACHI @done (16-06-02 14:45)
 
    ☐ Daphny's Paper: http://papers.nips.cc/paper/2397-max-margin-markov-networks.pdf @TSACHI
-   ☐ Add reulsts from code/outputs @TSACHI
+   ✔ Add reulsts from code/outputs @TSACHI @done (16-06-02 14:45)
 
- COMMON: @due(22.05.2016)
+COMMON: @due(22.05.2016)
    ☐ Describe limitations and future work for improvements (Part 3) @OHAD @TOPAZ @TSACHI
-     - General CRF - "before and after" letters
+     ✔ General CRF - "before and after" letters @done (16-06-02 14:45)
      - RNN as CRF: http://www.robots.ox.ac.uk/~szheng/papers/CRFasRNN.pdf @OHAD
-     - SVM as CRF
+     ✔ SVM as CRF @done (16-06-02 14:45)
 
 
-  Important dates:
-    - 26-28.05.2016 @OHAD and @Topaz are in vacation
-    - 02.06.2016 - Class presentation @OHAD @Topaz @TSACHI
+Important dates:
+    ✔ 26-28.05.2016 @OHAD and @Topaz are in vacation @done (16-06-02 14:46)
+    ✔ 02.06.2016 - Class presentation @OHAD @Topaz @TSACHI @done (16-06-02 14:46)
+
+Final stage:
+  ☐ Train CRF with SVM
+  ☐ 
+  ☐ 
+  ☐ 
+  ☐ 
+  ☐ 
+  ☐ 
