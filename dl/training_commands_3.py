@@ -3,9 +3,16 @@ import random
 import cPickle
 import numpy as np
 from dl.src.network3 import Network
-from dl.src.network3 import FullyConnectedLayer, SoftmaxLayer, ConvPoolLayer, ReLU
+from dl.src.network3 import FullyConnectedLayer, SoftmaxLayer, ConvPoolLayer
 from common.datasets.load_datasets import mnist_loader, load_letters
 import theano
+
+# Activation functions for neurons
+def linear(z): return z
+import theano.tensor as T
+def ReLU(z): return T.maximum(0.0, z)
+from theano.tensor.nnet import sigmoid
+from theano.tensor import tanh
 
 # get the data
 letters = load_letters()
@@ -38,8 +45,10 @@ mini_batch_size = np.int64(10)
 # net = Network([image_size, 128, num_of_labels])
 # conv_layer = ConvPoolLayer(filter_shape=(4, 1, 3, 3),
 #                            image_shape=(mini_batch_size, 1, 16, 8), poolsize=(2, 2), activation_fn=ReLU)
-fc_layer = FullyConnectedLayer(128, 256, activation_fn=ReLU, p_dropout=0.0)
-fc_layer2 = FullyConnectedLayer(256, 128, activation_fn=ReLU, p_dropout=0.0)
+# fc_layer = FullyConnectedLayer(128, 256, activation_fn=ReLU, p_dropout=0.0)
+# fc_layer2 = FullyConnectedLayer(256, 128, activation_fn=ReLU, p_dropout=0.0)
+fc_layer = FullyConnectedLayer(128, 256, activation_fn=sigmoid, p_dropout=0.0)
+fc_layer2 = FullyConnectedLayer(256, 128, activation_fn=sigmoid, p_dropout=0.0)
 sm_layer = SoftmaxLayer(128, 26)
 # net = Network(layers=[conv_layer, fc_layer, fc_layer2, sm_layer], mini_batch_size=mini_batch_size)
 net = Network(layers=[fc_layer, fc_layer2, sm_layer], mini_batch_size=mini_batch_size)
