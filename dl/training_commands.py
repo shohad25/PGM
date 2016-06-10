@@ -2,7 +2,8 @@ import os, sys
 import random
 import cPickle
 import numpy as np
-from dl.src.network import Network
+#from dl.src.network import Network
+from dl.src.network3 import Network
 from common.datasets.load_datasets import mnist_loader, load_letters
 from dl.user_network import *
 import pdb
@@ -38,14 +39,21 @@ dict_base_name = "training_"
 
 # initialize a network for training
 image_size = 128
-num_of_hidden_neurons = 32
+num_of_hidden_neurons = 300
 num_of_labels = 26
-net = Network([image_size, num_of_hidden_neurons, num_of_labels])
-# train NN:
+layers = [image_size, num_of_hidden_neurons, num_of_labels]
 num_of_epochs = 30
 mini_batch_size = 10
 eta = 1.0
-net.SGD(training_data, num_of_epochs, mini_batch_size, eta, test_data)
+
+#net = Network(layers)
+net = Network(layers, mini_batch_size)
+
+# train NN:
+net.SGD(training_data, num_of_epochs, mini_batch_size, eta)
+
+# test NN:
+net.evaluate(test_data)
 
 # save results:
 #base_path = "/home/ohadsh/Dropbox/Rami/Code_ohad/outputs/NN_basic"
