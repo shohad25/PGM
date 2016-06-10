@@ -1,72 +1,59 @@
 import os, sys
 import random
 import cPickle
-
+import numpy as np
 from dl.src.network import Network
-from common.datasets.load_datasets import mnist_loader
+from common.datasets.load_datasets import mnist_loader, load_letters
 from dl.user_network import *
 import pdb
-# import rlcompleter
-# pdb.Pdb.complete = rlcompleter.Completer(locals()).complete
-
-# Training data - list of tuples: each tuple contains (a,b):
-# a - numpy array - float 32 image (784)
-# b - numpy array - float 64 of binary(float) 0.0,1.0 - (len = 10)
-# Test & Validation data - list of tuples : 10,000. each tuple contains (a,b)
-# a - # a - numpy array - float 32 image (784)
-# b - int 64 - only one number (label 0-9)
 
 # get the data
-training_data, validation_data, test_data = mnist_loader()
-# del training_data
+letters = load_letters()
+X, y, folds = letters['data'], letters['labels'], letters['folds']
 
-# base_path = os.path.join(os.getcwd(), "data")
-# f = open(os.path.join(base_path, 'canny_train.pkl'), 'r+')
-# training_data = cPickle.load(f)
-# # f.close()
-#
-#
-# # convert_vec_to_num = lambda (vec): vec.
-# f = open(os.path.join(base_path, 'canny_test.pkl'), 'r+')
-# test_data = cPickle.load(f)
-# f.close()
+# we convert the lists to object arrays, as that makes slicing much more
+# convenient
+X, y = np.array(X), np.array(y)
+X_train, X_test = X[folds == 1], X[folds != 1]
+y_train, y_test = y[folds == 1], y[folds != 1]
 
-# e1 = training_data[0][0]
-# e2 = training_data2[0][0]
-# pdb.set_trace()
+# separate words to letters:
+X_train = np.vstack(X_train)
+X_test = np.vstack(X_test)
+y_train = np.hstack(y_train)
+y_test = np.hstack(y_test)
 
-training_lengths = [50000, 40000, 30000, 20000, 10000, 5000, 1000, 500, 100, 10]
+# Convert to mnist format:
+training_data = []
+for i, n in enumerate(y_train):
+    n_vec = np.zeros((26,1))
+    n_vec[n] = 1
+    training_data.append((X_train[i], n_vec))
 
-# training_lengths = [10]
+test_data = []
+for i, n in enumerate(y_test):
+    n_vec = np.zeros((26,1))
+    n_vec[n] = 1
+    test_data.append((X_test[i], n_vec))
 
 dict_base_name = "training_"
 
-# output directory:
-# base_path = os.path.join(os.getcwd(), "output2")
-
-training_index = 1
+# initialize a network for training
+image_size = 128
+num_of_labels = 26
+num_of_hidden_layers = 30
+net = Network([image_size, num_of_hidden_layers, num_of_labels])
+# train NN:
 num_of_epochs = 30
 mini_batch_size = 10
 eta = 3.0
-num_of_test_data = 10000
+net.SGD(training_data, num_of_epochs, mini_batch_size, eta, test_data)
 
-for length in training_lengths:
-
-    # initialize a network and data for training
-    net = Network([784, 30, 10])
-    training_data_to_use = random.sample(training_data, length)
-
-    # training
-    print " Start of Training " + str(training_index)
-    net.SGD(training_data_to_use, num_of_epochs, mini_batch_size, eta, test_data)
-    print " End of Training " + str(training_index)
-
-    # save results:
-    base_path = "/home/ohadsh/Dropbox/Rami/Code_ohad/outputs/NN_basic"
-    train_path = os.path.join(base_path, dict_base_name+str(training_index))
-    os.makedirs(train_path)
-    training_results_handler.save_net(net, os.path.join(train_path, "net.pcl"))
-    training_results_handler.save_net_params(net.sizes, len(training_data_to_use),
-                                         num_of_test_data, num_of_epochs, mini_batch_size,
-                                         eta, net.test_results, os.path.join(train_path, "info.txt"))
-    training_index += 1
+# save results:
+#base_path = "/home/ohadsh/Dropbox/Rami/Code_ohad/outputs/NN_basic"
+#train_path = os.path.join(base_path, dict_base_name)
+#os.makedirs(train_path)
+#training_results_handler.save_net(net, os.path.join(train_path, "net.pcl"))
+#training_results_handler.save_net_params(net.sizes, len(training_data),
+#                                         len(test_data), num_of_epochs, mini_batch_size,
+#                                     eta, net.test_results, os.path.join(train_path, "info.txt"))
