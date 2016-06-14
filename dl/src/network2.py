@@ -126,8 +126,7 @@ class Network():
             a = sigmoid_vec(np.dot(w, a)+b)
         return a
 
-    def SGD(self, training_data, epochs, mini_batch_size, eta, 
-            lmbda = 0.0, 
+    def SGD(self, training_data, epochs, mini_batch_size, eta, test_data, lmbda = 0.0, 
             evaluation_data=None, 
             monitor_evaluation_cost=False,
             monitor_evaluation_accuracy=False,
@@ -152,6 +151,10 @@ class Network():
         are empty if the corresponding flag is not set.
 
         """
+        if test_data:
+            n_test = len(test_data)
+            self.num_of_test_data = n_test
+		
         if evaluation_data: n_data = len(evaluation_data)
         n = len(training_data)
         evaluation_cost, evaluation_accuracy = [], []
@@ -184,6 +187,10 @@ class Network():
                 print "Accuracy on evaluation data: {} / {}".format(
                     self.accuracy(evaluation_data), n_data)
             print
+            if test_data:
+                evaluate = self.accuracy(test_data)
+                print "Epoch {0}: {1} / {2}".format(
+				j, evaluate, n_test)
         return evaluation_cost, evaluation_accuracy, \
             training_cost, training_accuracy
 

@@ -104,7 +104,6 @@ class Network():
             validation_data, test_data, lmbda=0.0):
         """Train the network using mini-batch stochastic gradient descent."""
         training_x, training_y = training_data
-
         validation_x, validation_y = validation_data
         test_x, test_y = test_data
 
@@ -304,7 +303,6 @@ class SoftmaxLayer():
 def size(data):
     "Return the size of the dataset `data`."
     return data[0].get_value(borrow=True).shape[0]
-    # return data[0].shape[0]
 
 def dropout_layer(layer, p_dropout):
     srng = shared_randomstreams.RandomStreams(
