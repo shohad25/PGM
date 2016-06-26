@@ -1,0 +1,15 @@
+Mapping NN:
+
+fc_layer = FullyConnectedLayer(128, 256, activation_fn=sigmoid, p_dropout=0.2)
+fc_layer1 = FullyConnectedLayer(256, 256, activation_fn=sigmoid, p_dropout=0.2)
+fc_layer2 = FullyConnectedLayer(256, 128, activation_fn=sigmoid, p_dropout=0.2)
+fc_layer3 = FullyConnectedLayer(128, 128, activation_fn=sigmoid, p_dropout=0.2)
+sm_layer = SoftmaxLayer(128, 26)
+net = Network(layers=[fc_layer, fc_layer1, fc_layer2, fc_layer3, sm_layer], mini_batch_size=mini_batch_size)
+
+-1: sm_layer - soft max layer output (26)
+-1_nored: sm_layer - soft max layer output (26) but normed. All zeros except the predicted value
+-2: fc_layer_3 output - after sigmoaid (128)
+-3: fc_layer_2 output - after sigmoaid (128)
+-4: fc_layer_1 output - after sigmoaid (256)
+-5: fc_layer output - after sigmoaid (256)

@@ -103,6 +103,7 @@ if __name__ == '__main__':
     layer_ind = -1
     with open(net_path, 'r') as f:
         net = cPickle.load(f)
+
     pred_train, pred_test = predict(net, layer_ind=layer_ind)
 
     with open(os.path.join(out_pred_path, 'train_pred_%d.pkl' % layer_ind), 'w') as f:

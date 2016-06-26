@@ -1,0 +1,7 @@
+Baseline:
+Test score with linear NN: 84.15%
+Test score with LCCRF: 0.787396
+
+-1 		   -1_normed	-2		    -3		    -4		    -5
+0.841482	0.841482    0.877931    0.877461    0.882891	0.882613
+												 BEST
